@@ -1,0 +1,21 @@
+<td class="tableblock halign-left valign-top">
+    <%= param.name %>
+</td>
+<td class="tableblock halign-left valign-top">
+    <%= param.in %>
+</td>
+<td class="tableblock halign-left valign-top">
+    <% if(param.schema.type === "array"){
+        const name = map[JSON.stringify(param.items)];
+    %>
+    <a href="#model-<%= name %>"><%= param.items.description || name %>[]</a>
+    <% }else{ %>
+        <%= param.schema.type %>
+    <% } %>
+</td>
+<td class="tableblock halign-left valign-top">
+    <%= param.required ? "非空" : "可选" %>
+</td>
+<td class="tableblock halign-left valign-top">
+    <%= param.description %>
+</td>

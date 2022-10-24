@@ -1,0 +1,5 @@
+<% if(schemas){ %>
+<% schemas.forEach((x)=>{ %>
+    <%- include('schema.ejs',{schema: x}); %>
+<% }); %>
+<% } %>

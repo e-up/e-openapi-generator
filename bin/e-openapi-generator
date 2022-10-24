@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const argv = require('minimist')(process.argv.slice(2), {
+    alias: {
+        i: 'input',
+        o: 'output'
+    }
+});
+
+const input = argv.input;
+
+const output = argv.output;
+
+require("../dist/index").generate(input,output);

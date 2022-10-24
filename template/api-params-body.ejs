@@ -1,0 +1,4 @@
+<% if(api.requestBody && api.requestBody.content['application/json']){ %>
+    <h3>请求参数</h3>
+    <%- include('body-params.ejs',{params:api.requestBody.content['application/json'].schema.properties})%>
+<% } %>

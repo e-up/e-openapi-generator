@@ -1,0 +1,36 @@
+<% if(schema){ %>
+    <%
+        const _schema = {...schema};
+        delete _schema.field;
+        const name = map[JSON.stringify(_schema)]; %>
+    <a name="model-<%= name %>"><h3><%= schema.description || schema.field %></h3></a>
+    <% if(schema.enum){ %>
+        <table class="tableblock frame-all grid-all stretch fields-TaskStatus">
+            <colgroup>
+                <col style="width: 12.5%;">
+                <col style="width: 87.5%;">
+            </colgroup>
+            <thead>
+            <tr>
+                <td class="tableblock halign-left valign-top">
+                    值
+                </td>
+                <td class="tableblock halign-left valign-top">
+                    描述
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+            <% schema.enum.forEach((x)=>{ %>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><%= x %></td>
+                    <td class="tableblock halign-left valign-top"></td>
+                </tr>
+            <% }); %>
+        </table>
+    <% } %>
+    <%- include('body-params.ejs',{params:schema.properties}); %>
+
+<% } %>

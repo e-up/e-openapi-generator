@@ -1,0 +1,11 @@
+<h2><%= api.summary || '' %></h2>
+<h3><%= (api.tags || []).join(''); %></h3>
+<div>
+    <p>
+        <%= api.method %>&nbsp;<%= api.path %>
+    </p>
+    <p>
+        <%= api.description %>
+    </p>
+    <%- include('api-params.ejs',{api:api,map:map}); %>
+</div>

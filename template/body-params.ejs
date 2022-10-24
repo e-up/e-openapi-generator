@@ -1,0 +1,25 @@
+<% if(params){ %>
+    <table class="tableblock frame-all grid-all stretch fields-TaskStatus">
+        <colgroup>
+            <col style="width: 12.5%;">
+            <col style="width: 12.5%;">
+            <col style="width: 12.5%;">
+            <col style="width: 52.5%;">
+        </colgroup>
+        <thead>
+        <tr>
+            <td class="tableblock halign-left valign-top">参数</td>
+            <td class="tableblock halign-left valign-top">类型</td>
+            <td class="tableblock halign-left valign-top">非空</td>
+            <td class="tableblock halign-left valign-top">描述</td>
+        </tr>
+        </thead>
+        <tbody>
+        <% Object.keys(params).forEach((key)=>{ %>
+            <tr>
+                <%- include('body-param.ejs',{param:{...params[key],field:key}}); %>
+            </tr>
+        <% }) %>
+        </tbody>
+    </table>
+<% } %>
