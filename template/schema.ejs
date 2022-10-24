@@ -3,7 +3,7 @@
         const _schema = {...schema};
         delete _schema.field;
         const name = map[JSON.stringify(_schema)]; %>
-    <a name="model-<%= name %>"><h3><%= schema.description || schema.field %></h3></a>
+    <a name="model-<%= name %>" href="#model-<%= name %>"><h3><%= schema.description || schema.field %></h3></a>
     <% if(schema.enum){ %>
         <table class="tableblock frame-all grid-all stretch fields-TaskStatus">
             <colgroup>
@@ -23,10 +23,10 @@
             <tbody>
 
             </tbody>
-            <% schema.enum.forEach((x)=>{ %>
+            <% schema.enum.forEach((x, index)=>{ %>
                 <tr>
                     <td class="tableblock halign-left valign-top"><%= x %></td>
-                    <td class="tableblock halign-left valign-top"></td>
+                    <td class="tableblock halign-left valign-top"><%= schema.externalDocs?.description?.split("<br/>")[index] %></td>
                 </tr>
             <% }); %>
         </table>

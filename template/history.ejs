@@ -1,0 +1,28 @@
+<% if(logs){ %>
+    <table class="tableblock frame-all grid-all stretch fields-TaskStatus">
+        <colgroup>
+            <col style="width: 12.5%;">
+            <col style="width: 12.5%;">
+            <col style="width: 62.5%;">
+            <col style="width: 12.5%;">
+        </colgroup>
+        <thead>
+        <tr>
+            <td class="tableblock halign-left valign-top">版本</td>
+            <td class="tableblock halign-left valign-top">时间</td>
+            <td class="tableblock halign-left valign-top">内容</td>
+            <td class="tableblock halign-left valign-top">修订人</td>
+        </tr>
+        </thead>
+        <tbody>
+        <% logs.forEach((log)=>{ %>
+            <tr>
+                <td class="tableblock halign-left valign-top"><%= log.version %></td>
+                <td class="tableblock halign-left valign-top"><%= log.date %></td>
+                <td class="tableblock halign-left valign-top"><%= log.message %></td>
+                <td class="tableblock halign-left valign-top"><%= log.author %></td>
+            </tr>
+        <% }); %>
+        </tbody>
+    </table>
+<% } %>

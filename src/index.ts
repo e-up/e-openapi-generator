@@ -5,16 +5,34 @@ import {renderFile} from "ejs";
 import Document = OpenAPIV3_1.Document;
 import SchemaObject = OpenAPIV3_1.SchemaObject;
 import {resolve} from 'path';
+// @ts-ignore
+import format from 'date-format';
 import Git, {Response, LogResult} from 'simple-git';
 
 export function generate(input: string, output: string) {
     return new Swagger().validate(input, async (err, api) => {
         if (!!api) {
             const git = Git();
-            let logs: LogResult;
+            let logs: any[] = [];
             try {
-                logs = await git.log();
-                console.log(logs)
+                const gitLogs = await git.log({file: input});
+                logs = gitLogs.all.map(x => {
+
+                    const msg = x.message;
+
+                    const msgs = msg.split(':');
+
+                    const version = msgs.length < 2 ? '' : msgs[0];
+
+                    const message = msgs[1] || msgs[0];
+
+                    return {
+                        author: x.author_name,
+                        version: version,
+                        message: message,
+                        date: format.asString('yyyy-MM-dd', new Date(x.date))
+                    };
+                });
             } catch (e) {
                 console.log(".....", e);
             }
@@ -29,7 +47,6 @@ export function generate(input: string, output: string) {
             const apis = Object.keys(paths).map(path => {
                 const methods: any = paths[path];
                 return Object.keys(methods).map(method => {
-                    console.log(methods[method]);
                     return {
                         method: method.toUpperCase(),
                         path,
@@ -40,7 +57,7 @@ export function generate(input: string, output: string) {
             }).reduce((x, y) => [...x, ...y]);
 
             const data = {
-                info, apis, map: schemaMaps, schemas
+                info, apis, map: schemaMaps, schemas, logs
             };
 
             renderFile(resolve(__dirname, "../template/index.ejs"), data, (err, html) => {

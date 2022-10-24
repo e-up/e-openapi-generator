@@ -2104,6 +2104,9 @@
                 padding: 0
             }
         }
+        a{
+            text-decoration: none;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/github.min.css">
 </head>
@@ -2158,6 +2161,7 @@
         </div>
     </div>
     <div class="sect1">
+        <%- include('history.ejs',{logs:logs}); %>
         <%- include('apis.ejs',{apis:apis,schemas: schemas}); %>
         <%- include('schemas.ejs',{schemas:schemas}); %>
     </div>
